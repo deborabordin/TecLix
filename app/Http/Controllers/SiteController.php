@@ -40,6 +40,11 @@ class SiteController extends Controller
     {
         return view ( 'descarte');
     }
+
+    public function cadastro()
+    {
+        return view ( 'cadastro');
+    }
 }
 
 

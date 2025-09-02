@@ -12,6 +12,7 @@ Route::controller(SiteController::class)->group(function() {
     Route::get('/perfil', 'perfil')->name('site.perfil');
     Route::get('/login', 'login')->name('site.login');
     Route::get('/descarte', 'descarte')->name('site.descarte');
+    Route::get('/cadastro', 'cadastro')->name('site.cadastro');
 });
 
 
