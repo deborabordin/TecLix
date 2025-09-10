@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout.app')
 
 @section('conteudo')
     <main class="container">
@@ -105,112 +105,58 @@
 
 @push('css')
 <style>
-    * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    }
+/* Reset básico para margem, padding e box-sizing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f2f2f2;
-    }
+/* Estilo básico do body */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f2f2f2;
+  padding-top: 60px; 
+}
 
-    /* Navbar */
-    nav.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #228B22;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 30px;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    }
+  /* REMOVIDO nav.navbar (menu) pois não quer no ponto de coleta */
 
-    .nav-links {
-    display: flex;
-    gap: 30px;
-    list-style: none;
-    }
+  /* Layout principal */
+main.container {
+  margin-top: 60px; /* para não ficar embaixo do menu */
+  height: calc(100vh - 60px); /* ocupa o resto da tela */
+  display: flex;
+}
 
-    .nav-links a {
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 16px;
-    }
 
-    .navbar-right {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    }
 
-    .navbar-right input[type="text"] {
-    padding: 6px 10px;
-    border-radius: 5px;
-    border: none;
-    font-size: 14px;
-    width: 160px;
-    }
-
-    .social-icons {
-    display: flex;
-    gap: 15px;
-    }
-
-    .social-icons a {
-    color: white;
-    font-size: 18px;
-    text-decoration: none;
-    }
-
-    .profile-icon {
-    color: white;
-    font-size: 20px;
-    }
-
-    /* Layout principal */
-    main.container {
-    display: flex;
-    margin-top: 60px; /* espaço pro menu fixo */
-    height: calc(100vh - 60px);
-    }
-
-    .left {
+  .left {
     width: 45%;
     padding: 30px 30px;
-    background-color: #f9f9f9;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: #fff; /* fundo branco simples */
+    /* Removidos border-radius, box-shadow e margin-left */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     overflow-y: auto;
-    margin-left: 20px;
-    }
+  }
 
-    .left h2 {
+  .left h2 {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 24px;
     color: #228B22;
     margin-bottom: 20px;
-    }
+  }
 
-    .left label {
+  .left label {
     font-size: 16px;
     font-weight: 600;
     color: #228B22;
     margin-bottom: 6px;
-    }
+  }
 
-    .left select,
-    .left button {
+  .left select,
+  .left button {
     margin-bottom: 20px;
     padding: 10px 15px;
     font-size: 16px;
@@ -222,40 +168,37 @@
     transition: border-color 0.3s ease, background-color 0.3s ease;
     cursor: pointer;
     font-weight: 600;
-    }
+  }
 
-    .left select:hover,
-    .left button:hover {
+  .left select:hover,
+  .left button:hover {
     border-color: #228B22;
     background-color: #afd4af;
-    }
+  }
 
-    /* Quando o SELECT estiver em foco */
-    .left select:focus {
+  .left select:focus {
     outline: none;
     border-color: #228B22;
     background-color: #cdf0d16b;
-    }
+  }
 
-    /* Quando o BOTÃO estiver em foco */
-    .left button:focus {
+  .left button:focus {
     outline: none;
     border-color: #228B22;
-    background-color: #52a152; /* mesma cor original */
-    }
+    background-color: #52a152;
+  }
 
-    /* Estilo normal do botão */
-    .left button {
+  .left button {
     background-color: #228B22;
     color: rgb(255, 255, 255);
     font-weight: 700;
-    }
+  }
 
-    .left button:hover {
+  .left button:hover {
     background-color: #073307c7;
-    }
+  }
 
-    #descricao {
+  #descricao {
     margin-top: 25px;
     background-color: #228B22;
     padding: 18px 20px;
@@ -264,9 +207,9 @@
     color: #ecffc2;
     box-shadow: 0 2px 8px rgba(56, 65, 35, 0.3);
     display: none;
-    }
+  }
 
-    #btn-voltar {
+  #btn-voltar {
     margin-top: 20px;
     background-color: #228B22;
     color: #ffffff;
@@ -278,29 +221,23 @@
     font-weight: 700;
     width: 100%;
     transition: all 0.3s ease;
-    }
+  }
 
-    #btn-voltar:hover {
-    background-color: #228B22;
-    color: white;
-    }
-
-
-    #btn-voltar:hover {
+  #btn-voltar:hover {
     background-color: #073307c7;
     color: white;
-    }
+  }
 
-
-    .right {
+  .right {
     width: 55%;
     height: 100%;
-    }
+  }
 
-    iframe {
+  iframe {
     width: 100%;
     height: 100%;
     border: none;
-    }
+  }
 </style>
 @endpush
+
