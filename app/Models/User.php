@@ -6,6 +6,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Comprovante;
+use App\Models\Ponto;
+
 
 class User extends Authenticatable
 {
@@ -45,4 +48,18 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // Comprovantes enviados pelo usuário
+public function comprovantes()
+{
+    return $this->hasMany(Comprovante::class);
+}
+
+// Pontos do usuário
+public function pontos()
+{
+    return $this->hasMany(Ponto::class);
+}
+
+
 }

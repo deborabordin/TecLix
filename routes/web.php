@@ -26,3 +26,12 @@ Route::post('/certificado', [CertificadoController::class, 'gerar'])->name('cert
 
 Route::get('/certificado', [CertificadoController::class, 'mostrar'])->name('site.certificado');
 
+
+use App\Http\Controllers\ComprovanteController;
+Route::get('/comprovantes', [ComprovanteController::class, 'index'])->name('comprovantes.index');
+Route::get('/comprovantes/criar', [ComprovanteController::class, 'create'])->name('comprovantes.create');
+Route::post('/comprovantes', [ComprovanteController::class, 'store'])->name('comprovantes.store');
+Route::post('/comprovantes/{id}/validar', [ComprovanteController::class, 'validar'])->name('comprovantes.validar');
+
+
+
