@@ -21,7 +21,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('site.certificado.gerar') }}">
+            <form method="POST" action="{{ route('certificado.gerar') }}">
                 @csrf
                 <label for="nome">Nome completo</label>
                 <input id="nome" name="nome" type="text" placeholder="Seu nome completo" value="{{ old('nome') }}" required />
@@ -50,12 +50,6 @@
 }
 
 
-
-.page-header h1 {
-    margin: 0;
-    font-size: 28px;
-    color: #14532d;
-}
 
 main {
     max-width: 600px;

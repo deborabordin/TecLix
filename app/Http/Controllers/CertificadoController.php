@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Certificado; // Importa o modelo Certificado
 
 class CertificadoController extends Controller
 {
     public function mostrar()
     {
         // Retorna a view do formulário do certificado
-        return view('certificado.form');  // Ou o nome da sua view correta
+        return view('certificado.form');
     }
 
-        public function gerar(Request $request)
+    public function gerar(Request $request)
     {
         // Valida os dados enviados do formulário
         $request->validate([
@@ -28,14 +29,11 @@ class CertificadoController extends Controller
         return view('certificado.resultado', compact('nome', 'campanha', 'data'));
     }
 
-    // app/Http/Controllers/CertificadoController.php
-
     public function listar()
     {
-    // Pegue todos os certificados do banco (depois vamos criar esse modelo)
-    $certificados = \App\Models\Certificado::all();
+        // Pega todos os certificados do banco
+        $certificado = Certificado::all();
 
-    return view('admin.certificados.index', compact('certificados'));
+        return view('admin.certificado.index', compact('certificado'));
     }
-
 }
