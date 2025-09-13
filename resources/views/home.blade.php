@@ -9,19 +9,19 @@
 
         <div class="image-grid">
             <div class="image-item">
-                <a href="#" class="image-card">
+                <a href="{{route('site.campanhas')}}" class="image-card">
                     <img src="img/imagem1.jpg" alt="Campanha 1">
                     <span class="card-title">Campanha 1</span>
                 </a>
             </div>
             <div class="image-item">
-                <a href="#" class="image-card">
+                <a href="{{route('site.campanhas')}}#" class="image-card">
                     <img src="img/imagem2.jpg" alt="Campanha 2">
                     <span class="card-title">Campanha 2</span>
                 </a>
             </div>
             <div class="image-item">
-                <a href="#" class="image-card">
+                <a href="{{route('site.campanhas')}}" class="image-card">
                     <img src="img/imagem3.jpg" alt="Campanha 3">
                     <span class="card-title">Campanha 3</span>
                 </a>
