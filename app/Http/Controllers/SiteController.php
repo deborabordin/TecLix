@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Usuario;
+
 
 use Illuminate\Http\Request;
 
@@ -28,8 +30,10 @@ class SiteController extends Controller
 
     public function perfil()
     {
-        return view ( 'perfil');
+        $usuario = \App\Models\Usuario::find(1); // apenas simulação por enquanto
+        return view('perfil', compact('usuario'));
     }
+    
 
     public function login()
     {
