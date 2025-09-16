@@ -1,13 +1,21 @@
-@extends('layouts.app')
+@extends('layout.app')
+
+@section('conteudo')
 <div class="container">
     <div class="card">
         <div class="home-icon">🏠</div>
         <img src="img/logoo.png" alt="Teclix Logo" class="logo">
         <h2>Bem-vindo de volta!</h2>
 
-        <form onsubmit="event.preventDefault(); window.location.href='telaInicial.html';">
-            <input type="email" placeholder="Email" required>
-            <input type="password" placeholder="Senha" required>
+        <form method="POST" action="{{ route('autenticacao.login') }}">
+            @csrf
+
+            <input type="email" placeholder="Email" name="email" required>
+            @error('email')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+
+            <input type="password" placeholder="Senha" name="password" required>
             <button type="submit">Entrar</button>
         </form>
 
@@ -17,7 +25,6 @@
         </div>
     </div>
 </div>
-@section('conteudo')
 
 @endsection
 

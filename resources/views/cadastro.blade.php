@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout.app')
 
 @section('conteudo')
     <div class="container">
@@ -7,16 +7,18 @@
             <img src="{{ asset('img/logoo.png') }}" alt="Teclix Logo" class="logo">
             <h2>Criar Conta</h2>
 
-            <form onsubmit="event.preventDefault(); window.location.href='telaInicial.html';">
-                <input type="text" placeholder="Nome completo" required>
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder=" Confirmar a senha" required>
+            <form action="{{ route('user.store') }}" method="post">
+                @csrf
+
+                <input type="text" placeholder="Nome completo" name="name" required>
+                <input type="email" placeholder="Email" name="email" required>
+                <input type="password" placeholder="Confirmar a senha" name="password" required>
                 <button type="submit">Cadastrar</button>
-                </formonsubmit=>
 
                 <div class="links">
-                    <a href="{{ route('site.login') }}">Já tenho conta</a>
+                    <a href="{{ route('login') }}">Já tenho conta</a>
                 </div>
+            </form>
         </div>
     </div>
 @endsection
