@@ -1,9 +1,9 @@
-@extends('layout.app')
 
-@section('conteudo')
+
+
 <div class="container">
     <div class="card">
-        <div class="home-icon">🏠</div>
+        <div class="home-icon">:</div>
         <img src="img/logoo.png" alt="Teclix Logo" class="logo">
         <h2>Bem-vindo de volta!</h2>
 
@@ -26,9 +26,8 @@
     </div>
 </div>
 
-@endsection
 
-@push('css')
+
 <style>
     body {
         margin: 0;
@@ -106,4 +105,4 @@
         text-decoration: underline;
     }
 </style>
-@endpush
+

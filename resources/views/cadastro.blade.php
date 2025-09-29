@@ -1,6 +1,4 @@
-@extends('layout.app')
 
-@section('conteudo')
     <div class="container">
         <div class="card">
             <div class="home-icon">🏠</div>
@@ -21,10 +19,8 @@
             </form>
         </div>
     </div>
-@endsection
 
 
-@push('css')
     <style>
         body {
             margin: 0;
@@ -111,4 +107,3 @@
             text-decoration: underline;
         }
     </style>
-@endpush
