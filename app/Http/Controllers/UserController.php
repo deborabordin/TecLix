@@ -21,7 +21,10 @@ class UserController extends Controller
             'password' => ['required', Password::min(6)]
         ]);
 
-        $user = User::create($validated);
+        $user = new User($validated);
+        $user->role = 'usuario';
+
+        $user->save();
 
         return redirect()->route('login');
     }

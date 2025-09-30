@@ -8,4 +8,8 @@ class Produto extends Model
 {
     protected $fillable = ['nome', 'pontuacao'];
 
+    public function pontosDeColeta()
+    {
+        return $this->belongsToMany(PontoDeColeta::class);
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produto;
+use App\Models\PontoDeColeta;
 use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
@@ -30,10 +31,26 @@ class ProdutoController extends Controller
         return redirect()->route('produtos.index')->with('success', 'Produto criado com sucesso!');
     }
 
-    public function show(Produto $produto)
+    public function show(PontoDeColeta $pontoDeColeta)
     {
-        return view('produtos.show', compact('produto'));
+        $produtosDisponiveis = Produto::whereNotIn('id', $pontoDeColeta->produtos->pluck('id'))->get();
+
+        return view('ponto-de-coletas.show', compact('pontoDeColeta', 'produtosDisponiveis'));
     }
+
+    public function addProduto(Request $request, PontoDeColeta $pontoDeColeta)
+    {
+        $request->validate([
+            'produto_id' => 'required|exists:produtos,id',
+        ]);
+
+        $pontoDeColeta->produtos()->attach($request->produto_id);
+
+        return redirect()->route('ponto-de-coletas.show', $pontoDeColeta);
+    }
+
+
+
 
     public function edit(Produto $produto)
     {

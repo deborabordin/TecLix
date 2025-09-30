@@ -5,28 +5,13 @@ use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\CertificadoController;
-
-
+use App\Http\Controllers\ComprovanteController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PontoDeColetaController;
 
 Route::resource('produtos', ProdutoController::class);
 
 // Mostrar o formulário
-Route::get('/certificado', [CertificadoController::class, 'mostrar'])->name('certificado.form');
-
-// Enviar o formulário (gera o certificado)
-Route::post('/certificado', [CertificadoController::class, 'gerar'])->name('certificado.gerar');
-
-Route::get('/certificado', [CertificadoController::class, 'mostrar'])->name('site.certificado');
-
-
-use App\Http\Controllers\ComprovanteController;
-use App\Http\Controllers\UserController;
-
-Route::get('/comprovantes', [ComprovanteController::class, 'index'])->name('comprovantes.index');
-Route::get('/comprovantes/criar', [ComprovanteController::class, 'create'])->name('comprovantes.create');
-Route::post('/comprovantes', [ComprovanteController::class, 'store'])->name('comprovantes.store');
-Route::post('/comprovantes/{id}/validar', [ComprovanteController::class, 'validar'])->name('comprovantes.validar');
-
 Route::controller(SiteController::class)->group(function() {
     Route::get('/', 'home')->name('site.home');
     Route::get('/login', 'login')->name('login');
@@ -45,8 +30,24 @@ Route::controller(AutenticacaoController::class)->group(function() {
 
 // Rotas que precisam de login
 Route::middleware(['auth'])->group(function() {
+
     Route::controller(SiteController::class)->group(function() {
         Route::get('/perfil', 'perfil')->name('site.perfil');
         Route::get('/descarte', 'descarte')->name('site.descarte');
     });
+
+    Route::get('/certificado', [CertificadoController::class, 'mostrar'])->name('certificado.form');
+
+    // Enviar o formulário (gera o certificado)
+    Route::post('/certificado', [CertificadoController::class, 'gerar'])->name('certificado.gerar');
+
+    Route::get('/certificado', [CertificadoController::class, 'mostrar'])->name('site.certificado');
+
+    Route::get('/comprovantes', [ComprovanteController::class, 'index'])->name('comprovantes.index');
+    Route::get('/comprovantes/criar', [ComprovanteController::class, 'create'])->name('comprovantes.create');
+    Route::post('/comprovantes', [ComprovanteController::class, 'store'])->name('comprovantes.store');
+    Route::post('/comprovantes/{id}/validar', [ComprovanteController::class, 'validar'])->name('comprovantes.validar');
 });
+Route::resource('ponto-de-coletas', PontoDeColetaController::class);
+Route::post('/ponto-de-coletas/{pontoDeColeta}/add-produto', [PontoDeColetaController::class, 'addProduto'])
+    ->name('ponto-de-coletas.addProduto');
