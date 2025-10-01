@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PontoDeColeta;
+use App\Models\Produto;
 use Illuminate\Http\Request;
 
 class PontoDeColetaController extends Controller
@@ -25,8 +26,10 @@ class PontoDeColetaController extends Controller
     {
         $validated = $request->validate([
             'nome' => 'required',
-            'endereco' => 'required',
+            'bairro' => 'required',
+            'rua' => 'required',
             'cidade' => 'required',
+            'numero' => 'required',
         ]);
 
         PontoDeColeta::create($validated);
@@ -36,7 +39,22 @@ class PontoDeColetaController extends Controller
 
     public function show(PontoDeColeta $pontoDeColeta)
     {
-        return view('ponto-de-coletas.show', compact('pontoDeColeta'));
+        $produtosDisponiveis = Produto::whereNotIn('id', $pontoDeColeta->produtos->pluck('id'))->get();
+
+        return view('ponto-de-coletas.show', compact('pontoDeColeta', 'produtosDisponiveis'));
+    }
+
+    public function addProduto(PontoDeColeta $pontoDeColeta, Request $request)
+    {
+        $request->validate([
+            'produto_id' => 'required|exists:produtos,id'
+        ]);
+
+        $produto = Produto::find($request->produto_id);
+
+        $pontoDeColeta->produtos()->attach($produto);
+
+        return redirect()->route('ponto-de-coletas.show', $pontoDeColeta->id);
     }
 
     // outros métodos como edit, update e destroy seguem o mesmo padrão

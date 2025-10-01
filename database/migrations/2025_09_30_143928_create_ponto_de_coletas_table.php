@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('ponto_de_coletas', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->string('endereco');
+            $table->string('bairro');
             $table->string('cidade');
+            $table->string('numero');
+            $table->string('rua');
             $table->timestamps();
         });
     }
