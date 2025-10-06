@@ -31,8 +31,14 @@ class SiteController extends Controller
 
     public function perfil()
     {
-        $usuario = User::find(1); // apenas simulação por enquanto
-        return view('perfil', compact('usuario'));
+        $usuario = auth()->user();
+
+        $pontos = \App\Models\Ponto::where('user_id', $usuario->id)->sum('quantidade');
+
+        $meta = 200;
+        $porcentagem = $meta > 0 ? min(100, intval(($pontos / $meta) * 100)) : 0;
+
+        return view('perfil', compact('usuario', 'pontos', 'meta', 'porcentagem'));
     }
 
 

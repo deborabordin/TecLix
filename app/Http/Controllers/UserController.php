@@ -43,4 +43,24 @@ class UserController extends Controller
     {
 
     }
+
+    public function perfil()
+    {
+        // pega o usuário logado
+        $usuario = auth()->user();
+
+        // soma total de pontos do usuário (pode ser 0)
+        $pontos = \App\Models\Ponto::where('user_id', $usuario->id)->sum('quantidade');
+
+        // meta e progresso
+        $meta = 200;
+        $porcentagem = $meta > 0 ? min(100, intval(($pontos / $meta) * 100)) : 0;
+
+        // envia tudo pra view
+        return view('perfil', compact('usuario', 'pontos', 'meta', 'porcentagem'));
+    }
+
+
+
 }
+

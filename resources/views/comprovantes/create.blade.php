@@ -4,16 +4,18 @@
 
 @section('conteudo')
 <div class="comprovante-container">
-    <h1>Enviar Comprovante</h1>
-
     <form action="{{ route('comprovantes.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
-        <label for="foto">Foto do Comprovante</label>
-        <input type="file" name="foto" id="foto" required>
+        <label for="produto">Produto:</label>
+        <select name="produto_id" required>
+            @foreach($produtos as $produto)
+                <option value="{{ $produto->id }}">{{ $produto->nome }} ({{ $produto->pontuacao }} pontos)</option>
+            @endforeach
+        </select>
 
-        <label for="observacoes">Observações (opcional)</label>
-        <textarea name="observacoes" id="observacoes" rows="4"></textarea>
+        <label for="foto">Foto do comprovante:</label>
+        <input type="file" name="foto" required>
 
         <button type="submit">Enviar</button>
     </form>

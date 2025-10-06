@@ -11,18 +11,25 @@ class Comprovante extends Model
 
     protected $fillable = [
         'user_id',
+        'produto_id',
         'foto',
         'status',
         'observacoes',
     ];
 
-    // Um comprovante pertence a um usuário
+    // relacionamento com o usuário
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // Um comprovante pode ter um ponto associado (se validado)
+    // relacionamento com o produto
+    public function produto()
+    {
+        return $this->belongsTo(Produto::class);
+    }
+
+    // relacionamento com ponto
     public function ponto()
     {
         return $this->hasOne(Ponto::class);

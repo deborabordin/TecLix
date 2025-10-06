@@ -33,11 +33,6 @@
         <div class="evolucao-box">
             <h3>Sua Evolução no Descarte</h3>
             <p class="pontuacao">Pontos</p>
-            @php
-                $pontos = 120; // <- simulação (substitua pelo valor real do usuário depois)
-                $meta = 200;
-                $porcentagem = min(100, intval(($pontos / $meta) * 100));
-            @endphp
             <h2>{{ $pontos }}</h2>
             <p class="meta">Certificados a partir de {{ $meta }} pontos</p>
 
@@ -48,6 +43,7 @@
             <p class="faltam">
                 Faltam {{ max(0, $meta - $pontos) }} pontos para o seu certificado
             </p>
+
 
             {{-- BOTÃO: Gera certificado se tiver 200 pontos --}}
             <a href="{{ route('site.certificado') }}"

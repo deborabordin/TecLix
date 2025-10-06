@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Comprovante;
 use App\Models\Ponto;
+use App\Models\Produto;
 
 class ComprovanteController extends Controller
 {
@@ -20,27 +21,28 @@ class ComprovanteController extends Controller
     // Formulário para enviar um novo comprovante
     public function create()
     {
-        return view('comprovantes.create');
+        $produtos = Produto::all();
+        return view('comprovantes.create', compact('produtos'));
     }
 
     // Salvar comprovante enviado
     public function store(Request $request)
     {
         $request->validate([
+            'produto_id' => 'required|exists:produtos,id',
             'foto' => 'required|image|max:2048',
-            'observacoes' => 'nullable|string',
         ]);
 
         $path = $request->file('foto')->store('comprovantes', 'public');
 
         Comprovante::create([
-            'user_id' => 1,  // Ou outro ID fixo válido que exista na tabela users
+            'user_id' => auth()->id(),
+            'produto_id' => $request->produto_id,
             'foto' => $path,
-            'observacoes' => $request->observacoes,
-            'status' => 'pendente',
         ]);
 
         return redirect()->route('comprovantes.index')->with('success', 'Comprovante enviado com sucesso!');
+
     }
 
     // Aprovar ou rejeitar comprovante

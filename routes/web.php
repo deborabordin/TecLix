@@ -8,6 +8,7 @@ use App\Http\Controllers\CertificadoController;
 use App\Http\Controllers\ComprovanteController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PontoDeColetaController;
+use App\Http\Middleware\IsAdmin;
 
 Route::resource('produtos', ProdutoController::class);
 
@@ -51,3 +52,12 @@ Route::middleware(['auth'])->group(function() {
 Route::resource('ponto-de-coletas', PontoDeColetaController::class);
 Route::post('/ponto-de-coletas/{pontoDeColeta}/add-produto', [PontoDeColetaController::class, 'addProduto'])
     ->name('ponto-de-coletas.addProduto');
+
+    use App\Http\Controllers\Admin\ComprovanteAdminController;
+
+    Route::middleware(['auth', IsAdmin::class])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/comprovantes', [ComprovanteAdminController::class, 'index'])->name('comprovantes.index');
+    Route::get('/comprovantes/{comprovante}', [ComprovanteAdminController::class, 'show'])->name('comprovantes.show');
+    Route::post('/comprovantes/{comprovante}/aprovar', [ComprovanteAdminController::class, 'aprovar'])->name('comprovantes.aprovar');
+    Route::post('/comprovantes/{comprovante}/rejeitar', [ComprovanteAdminController::class, 'rejeitar'])->name('comprovantes.rejeitar');
+});

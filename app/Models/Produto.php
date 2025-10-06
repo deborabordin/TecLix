@@ -12,4 +12,10 @@ class Produto extends Model
     {
         return $this->belongsToMany(PontoDeColeta::class);
     }
+
+    public function comprovantes()
+{
+    return $this->hasMany(Comprovante::class);
+}
+
 }

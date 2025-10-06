@@ -15,13 +15,11 @@ class Ponto extends Model
         'quantidade',
     ];
 
-    // Um ponto pertence a um usuário
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // Um ponto pertence a um comprovante
     public function comprovante()
     {
         return $this->belongsTo(Comprovante::class);
