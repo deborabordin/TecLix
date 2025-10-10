@@ -21,18 +21,18 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('certificado.gerar') }}">
-                @csrf
-                <label for="nome">Nome completo</label>
-                <input id="nome" name="nome" type="text" placeholder="Seu nome completo" value="{{ old('nome') }}" required />
+            @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
 
-                <label for="campanha">Campanha</label>
-                <select id="campanha" name="campanha" required>
-                    <option value="">Selecione a campanha</option>
-                    <option value="Campanha A" {{ old('campanha') == 'Campanha A' ? 'selected' : '' }}>Campanha A</option>
-                    <option value="Campanha B" {{ old('campanha') == 'Campanha B' ? 'selected' : '' }}>Campanha B</option>
-                    <option value="Campanha C" {{ old('campanha') == 'Campanha C' ? 'selected' : '' }}>Campanha C</option>
-                </select>
+        <div class="text-center mt-4">
+            <a href="{{ route('certificado.gerar') }}" class="btn btn-success">
+                Gerar Certificado
+            </a>
+        </div>
+
 
                 <button class="btn" type="submit">Gerar e imprimir</button>
             </form>

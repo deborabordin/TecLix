@@ -1,8 +1,34 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <title>Certificado</title>
+    <title>Certificado de Participação</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 30px; }
+        .certificado { border: 5px solid #4CAF50; padding: 40px; }
+        h1 { color: #4CAF50; }
+    </style>
+</head>
+<body>
+    <div class="certificado">
+        <h1>Certificado de Participação</h1>
+        <p>Certificamos que <strong>{{ $nome }}</strong></p>
+        <p>participou da <strong>{{ $campanha }}</strong></p>
+        <p>em {{ $data }}.</p>
+
+        <p>Durante a campanha, o(a) participante:</p>
+        <ul style="text-align: left; display: inline-block;">
+            @foreach($lixos as $tipo => $quantidade)
+                <li>Descartou {{ $quantidade }}x {{ $tipo }}</li>
+            @endforeach
+        </ul>
+
+        <p><strong>Total de pontos acumulados: {{ $totalPontos }}</strong></p>
+
+        <p>Parabéns por contribuir com a preservação do meio ambiente!</p>
+    </div>
+</body>
+</html>
+
     <style>
         body {
             font-family: 'Times New Roman', serif;
@@ -61,25 +87,4 @@
             color: #777;
         }
     </style>
-</head>
-<body>
-    <div class="cert">
-        <h1>Certificado de Participação</h1>
-        <p>A Teclix certifica que</p>
-        <p class="name">{{ $nome }}</p>
-        <p>participou da <strong>{{ $campanha }}</strong>, contribuindo para o descarte responsável de resíduos eletrônicos.</p>
-        <p>Emitido em {{ $data }}</p>
-        <div class="assinatura">
-            <hr />
-            <span>Coordenação do Projeto Teclix</span>
-        </div>
-        <footer>Teclix — Descarte Eletrônico Responsável • @teclix25</footer>
-    </div>
 
-    <script>
-        window.onload = function () {
-            window.print();
-        };
-    </script>
-</body>
-</html>

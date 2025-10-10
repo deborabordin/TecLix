@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Certificado; // Importa o modelo Certificado
+
+
+
 
 class CertificadoController extends Controller
 {
@@ -13,21 +17,40 @@ class CertificadoController extends Controller
         return view('certificado.form');
     }
 
-    public function gerar(Request $request)
+    public function gerar()
     {
-        // Valida os dados enviados do formulário
-        $request->validate([
-            'nome' => 'required|string|max:255',
-            'campanha' => 'required|string|max:255',
-        ]);
+    /** @var \App\Models\User $user */
+$user = Auth::user();
 
-        $nome = $request->input('nome');
-        $campanha = $request->input('campanha');
+
+        // Pega todos os comprovantes aprovados com pontos (ajuste se necessário)
+        $comprovantes = $user->comprovantes()->with(['produto', 'ponto'])->get();
+
+        // Soma total de pontos do usuário
+        $totalPontos = $comprovantes->sum(function ($comprovante) {
+            return optional($comprovante->ponto)->quantidade ?? 0;
+        });
+
+        // ⚠️ Verifica se atingiu os 200 pontos mínimos
+        if ($totalPontos < 200) {
+            return redirect()->back()->with('error', 'Você precisa de no mínimo 200 pontos para gerar o certificado.');
+        }
+
+        // Nome do usuário
+        $nome = $user->name;
         $data = date('d/m/Y');
 
-        // Retorna a view do certificado gerado, passando os dados
-        return view('certificado.resultado', compact('nome', 'campanha', 'data'));
+        // Agrupar os lixos descartados
+        $lixos = $comprovantes->groupBy('produto.nome')->map(function ($group) {
+            return $group->count();
+        });
+
+        // Campanha pode ser fixa ou dinâmica
+        $campanha = 'Campanha de Reciclagem Sustentável 2025';
+
+        return view('certificado.resultado', compact('nome', 'data', 'totalPontos', 'lixos', 'campanha'));
     }
+
 
     public function listar()
     {

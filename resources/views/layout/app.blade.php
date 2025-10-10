@@ -107,7 +107,7 @@
             <ul class="nav-links">
                 <li><a href="{{ route('site.campanhas') }}">Campanhas</a></li>
                 <li><a href="{{ route('site.coletas') }}">Ponto de Coletas</a></li>
-                <li><a href="{{ route('site.certificado') }}">Certificado</a></li>
+                <li><a href="{{ route('certificado.gerar') }}">Certificado</a></li>
             </ul>
         </div>
 

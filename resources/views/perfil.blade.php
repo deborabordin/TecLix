@@ -46,7 +46,7 @@
 
 
             {{-- BOTÃO: Gera certificado se tiver 200 pontos --}}
-            <a href="{{ route('site.certificado') }}"
+            <a href="{{ route('certificado.gerar') }}"
                class="btn-certificado {{ $pontos < $meta ? 'disabled' : '' }}"
                {{ $pontos < $meta ? 'onclick=event.preventDefault()' : '' }}>
                 Gerar Certificado
