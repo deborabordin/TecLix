@@ -108,6 +108,9 @@
                 <li><a href="{{ route('site.campanhas') }}">Campanhas</a></li>
                 <li><a href="{{ route('site.coletas') }}">Ponto de Coletas</a></li>
                 <li><a href="{{ route('certificado.gerar') }}">Certificado</a></li>
+                @can('admin', App\Models\User::class)
+                    <li><a href="{{ route('admin.home') }}">Admin</a></li>
+                @endcan
             </ul>
         </div>
 

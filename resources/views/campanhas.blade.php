@@ -1,41 +1,39 @@
 @extends('layout.app')
 
 @section('conteudo')
-    <!-- CONTAINER PRINCIPAL VERDE -->
-    <div class="content">
-        <div class="info-container">
+<div class="content">
+    <div class="info-container">
+        @if($campanha)
             <div class="titulo-campanha">
-                <h2>Título da Campanha</h2>
+                <h2>{{ $campanha->titulo }}</h2>
                 <hr />
-                <p class="descricao">
-                    Aqui vai a descrição da campanha. Lorem ipsum dolor sit amet,
-                    consectetur adipiscing elit.
-                </p>
+                <p class="descricao">{{ $campanha->descricao }}</p>
             </div>
 
             <div class="detalhes-campanha">
                 <h3>Informações da Campanha</h3>
-                <p>
-                    Aqui você pode colocar mais detalhes sobre a campanha, objetivos,
-                    datas, etc.
-                </p>
+                <p>{{ $campanha->detalhes }}</p>
             </div>
 
             <div class="local-campanha">
                 <h3>Informações do Local</h3>
-                <p>
-                    Endereço, horário, contato e outras informações relevantes do local.
-                </p>
+                <p>{{ $campanha->local }}</p>
             </div>
 
             <a href="{{ route('site.home') }}" class="botao-voltar">Voltar</a>
-        </div>
-
-        <div class="imagem-campanha">
-            <img src="{{ asset('img/imagem3.jpg') }}" alt="Imagem da Campanha" />
-        </div>
+        @else
+            <p>Nenhuma campanha ativa no momento.</p>
+        @endif
     </div>
+
+    <div class="imagem-campanha">
+        @if($campanha && $campanha->imagem)
+            <img src="{{ asset($campanha->imagem) }}" alt="Imagem da Campanha" />
+        @endif
+    </div>
+</div>
 @endsection
+
 
 @push('css')
 <style>

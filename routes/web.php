@@ -19,6 +19,7 @@ Route::controller(SiteController::class)->group(function() {
     Route::get('/campanhas', 'campanhas')->name('site.campanhas');
     Route::get('/cadastro', 'cadastro')->name('site.cadastro');
     Route::get('/coletas', 'coletas')->name('site.coletas');
+
 });
 
 
@@ -66,9 +67,11 @@ Route::post('/ponto-de-coletas/{pontoDeColeta}/add-produto', [PontoDeColetaContr
 
 
 
-    use App\Http\Controllers\Admin\ComprovanteAdminController;
+use App\Http\Controllers\Admin\ComprovanteAdminController;
+use App\Http\Controllers\AdminController;
 
-    Route::middleware(['auth', IsAdmin::class])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', IsAdmin::class])->prefix('admin')->group(function () {
+    Route::get('/home', [AdminController::class, 'home'])->name('admin.home');
     Route::get('/comprovantes', [ComprovanteAdminController::class, 'index'])->name('comprovantes.index');
     Route::get('/comprovantes/{comprovante}', [ComprovanteAdminController::class, 'show'])->name('comprovantes.show');
     Route::post('/comprovantes/{comprovante}/aprovar', [ComprovanteAdminController::class, 'aprovar'])->name('comprovantes.aprovar');

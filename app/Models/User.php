@@ -51,16 +51,16 @@ class User extends Authenticatable
     }
 
     // Comprovantes enviados pelo usuário
-public function comprovantes()
-{
-    return $this->hasMany(Comprovante::class);
-}
+    public function comprovantes()
+    {
+        return $this->hasMany(Comprovante::class);
+    }
 
-// Pontos do usuário
-public function pontos()
-{
-    return $this->hasMany(Ponto::class);
-}
+    // Pontos do usuário
+    public function pontos()
+    {
+        return $this->hasMany(Ponto::class);
+    }
 
 
 }

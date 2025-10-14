@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Campanha;
 
 
 use Illuminate\Http\Request;
@@ -21,9 +22,12 @@ class SiteController extends Controller
 
     public function campanhas()
     {
-        return view ( 'campanhas');
-    }
+        // Busca a campanha ativa (ou a mais recente se preferir)
+        $campanha = Campanha::where('ativa', true)->latest()->first();
 
+        return view('campanhas', compact('campanha'));
+
+    }
     public function certificado()
     {
         return view ( 'certificado');
