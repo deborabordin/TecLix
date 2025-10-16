@@ -2,9 +2,19 @@
 @csrf
 
 <label>Nome:</label>
-<input type="text" name="nome" value="{{ old('nome', $produto->nome ?? '') }}"><br>
+<input class="form-control" type="text" name="nome" value="{{ old('nome', $produto->nome ?? '') }}"><br>
+@error('nome')
+    <p>{{ $message }}</p>
+@enderror
 
 <label>Pontuação:</label>
-<input type="text" name="pontuacao" value="{{ old('pontuacao', $produto->pontuacao ?? '') }}"><br>
+<input class="form-control" type="text" name="pontuacao" value="{{ old('pontuacao', $produto->pontuacao ?? '') }}"><br>
+@error('pontuacao')
+    <p>{{ $message }}</p>
+@enderror
 
-<button type="submit">Salvar</button>
+
+<p class="text-center">
+    <a class="btn btn-secondary" href="{{ route('produtos.index') }}">Voltar</a>
+    <button class="btn btn-success" type="submit">Salvar</button>
+</p>

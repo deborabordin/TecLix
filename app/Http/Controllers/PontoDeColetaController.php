@@ -64,7 +64,7 @@ class PontoDeColetaController extends Controller
      */
     public function edit(PontoDeColeta $pontoDeColeta)
     {
-        //
+        return view('ponto-de-coletas.edit', compact('pontoDeColeta'));
     }
 
     /**
@@ -72,7 +72,17 @@ class PontoDeColetaController extends Controller
      */
     public function update(Request $request, PontoDeColeta $pontoDeColeta)
     {
-        //
+        $request->validate([
+            'nome' => 'required',
+            'bairro' => 'required',
+            'rua' => 'required',
+            'cidade' => 'required',
+            'numero' => 'required',
+        ]);
+
+        $pontoDeColeta->update($request->all());
+
+        return redirect()->route('ponto-de-coletas.index')->with('success', 'Ponto de Coleta atualizado com sucesso!');
     }
 
     /**
@@ -80,6 +90,8 @@ class PontoDeColetaController extends Controller
      */
     public function destroy(PontoDeColeta $pontoDeColeta)
     {
-        //
+        $pontoDeColeta->delete();
+
+        return redirect()->route('ponto-de-coletas.index')->with('success', 'Ponto de Coleta deletado com sucesso!');
     }
 }
