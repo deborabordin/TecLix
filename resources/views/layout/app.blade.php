@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
+
     <style>
         /* Reset */
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -110,7 +111,7 @@
             </a>
 
             <ul class="nav-links">
-                <li><a href="{{ route('site.campanhas') }}">Campanhas</a></li>
+                <li><a href="{{ route('site.home') }}">Campanhas</a></li>
                 <li><a href="{{ route('site.coletas') }}">Ponto de Coletas</a></li>
                 <li><a href="{{ route('certificado.gerar') }}">Certificado</a></li>
                 @can('admin', App\Models\User::class)

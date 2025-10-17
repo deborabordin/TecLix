@@ -9,14 +9,18 @@ use App\Http\Controllers\ComprovanteController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PontoDeColetaController;
 use App\Http\Middleware\IsAdmin;
+use App\Http\Controllers\CampanhaController;
+
 
 Route::resource('produtos', ProdutoController::class);
+Route::resource('admin/campanhas', CampanhaController::class);
 
 // Mostrar o formulário
 Route::controller(SiteController::class)->group(function() {
     Route::get('/', 'home')->name('site.home');
     Route::get('/login', 'login')->name('login');
     Route::get('/campanhas', 'campanhas')->name('site.campanhas');
+    Route::get('/campanhas/{campanha}', 'campanhas')->name('site.campanhas-filter');
     Route::get('/cadastro', 'cadastro')->name('site.cadastro');
     Route::get('/coletas', 'coletas')->name('site.coletas');
 
