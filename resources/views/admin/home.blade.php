@@ -16,6 +16,10 @@
         <a href="{{ url('/ponto-de-coletas') }}" style="padding: 15px; background-color: #ffed4a; color: #000; text-align: center; text-decoration: none; border-radius: 5px;">
             Cadastrar Pontos de Coleta
         </a>
+
+        <a class="btn btn-warning" href="{{ url('/admin/campanhas') }}" style="padding: 15px;  color: #000; text-align: center; text-decoration: none; border-radius: 5px;">
+            Cadastrar Campanha
+         </a>
     </div>
 </div>
 @endsection

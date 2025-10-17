@@ -28,7 +28,7 @@
 
     <div class="imagem-campanha">
         @if($campanha && $campanha->imagem)
-            <img src="{{ asset($campanha->imagem) }}" alt="Imagem da Campanha" />
+            <img src="{{ asset('storage/' . $campanha->imagem) }}" alt="" width="200" alt="Imagem da Campanha">
         @endif
     </div>
 </div>

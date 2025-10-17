@@ -4,13 +4,13 @@
 <label>Nome:</label>
 <input class="form-control" type="text" name="nome" value="{{ old('nome', $produto->nome ?? '') }}"><br>
 @error('nome')
-    <p>{{ $message }}</p>
+    <p class="text-danger">{{ $message }}</p>
 @enderror
 
 <label>Pontuação:</label>
 <input class="form-control" type="text" name="pontuacao" value="{{ old('pontuacao', $produto->pontuacao ?? '') }}"><br>
 @error('pontuacao')
-    <p>{{ $message }}</p>
+    <p class="text-danger">{{ $message }}</p>
 @enderror
 
 

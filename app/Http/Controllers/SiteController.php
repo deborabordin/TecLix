@@ -12,7 +12,8 @@ class SiteController extends Controller
 {
     public function home()
     {
-        return view('home');
+        $campanhas = Campanha::where('ativa', true)->get();
+        return view('home', compact('campanhas'));
     }
 
     public function coletas()
@@ -20,14 +21,12 @@ class SiteController extends Controller
         return view ( 'coletas');
     }
 
-    public function campanhas()
+    public function campanhas(Campanha $campanha)
     {
-        // Busca a campanha ativa (ou a mais recente se preferir)
-        $campanha = Campanha::where('ativa', true)->latest()->first();
-
         return view('campanhas', compact('campanha'));
-
     }
+
+
     public function certificado()
     {
         return view ( 'certificado');
