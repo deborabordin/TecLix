@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PontoDeColetaController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Controllers\CampanhaController;
+use Illuminate\Support\Facades\Auth;
 
 
 Route::resource('produtos', ProdutoController::class);
@@ -74,10 +75,16 @@ Route::post('/ponto-de-coletas/{pontoDeColeta}/add-produto', [PontoDeColetaContr
 use App\Http\Controllers\Admin\ComprovanteAdminController;
 use App\Http\Controllers\AdminController;
 
-Route::middleware(['auth', IsAdmin::class])->prefix('admin')->group(function () {
-    Route::get('/home', [AdminController::class, 'home'])->name('admin.home');
+Route::middleware(['auth', IsAdmin::class])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/home', [AdminController::class, 'home'])->name('home');
+
     Route::get('/comprovantes', [ComprovanteAdminController::class, 'index'])->name('comprovantes.index');
     Route::get('/comprovantes/{comprovante}', [ComprovanteAdminController::class, 'show'])->name('comprovantes.show');
     Route::post('/comprovantes/{comprovante}/aprovar', [ComprovanteAdminController::class, 'aprovar'])->name('comprovantes.aprovar');
     Route::post('/comprovantes/{comprovante}/rejeitar', [ComprovanteAdminController::class, 'rejeitar'])->name('comprovantes.rejeitar');
 });
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect()->route('site.home');
+})->name('logout');

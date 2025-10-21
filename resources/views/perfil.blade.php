@@ -61,6 +61,15 @@
                 Envie uma foto, vídeo ou recibo do seu descarte. <br>
                 Seus pontos serão validados pela nossa equipe em até 3 dias úteis.
             </p>
+
+            @auth
+            <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                @csrf
+                <button type="submit" class="btn btn-danger">
+                    Sair
+                </button>
+            </form>
+        @endauth
         </div>
 
     </div>
