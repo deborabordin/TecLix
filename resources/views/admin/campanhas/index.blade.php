@@ -36,7 +36,7 @@
                                         <form action="{{ route('campanhas.destroy', $campanha) }}" method="POST">
 
                                             <a class="btn btn-outline-secondary"
-                                                href="{{ route('campanhas.show', $campanha) }}">Mostrar</a>
+                                                href="{{ route('campanhas.show', $campanha) }}">Ver</a>
 
                                             <a class="btn btn-outline-secondary"
                                                 href="{{ route('campanhas.edit', $campanha) }}">Editar</a>
@@ -45,7 +45,7 @@
                                             @method('DELETE')
 
                                             <button type="submit" class="btn btn-outline-danger"
-                                                onclick="return confirm('Tem certeza?')">Deletar</button>
+                                                onclick="return confirm('Tem certeza?')">Excluir</button>
 
                                              
                                         </form>
