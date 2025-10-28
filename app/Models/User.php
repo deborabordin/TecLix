@@ -62,5 +62,9 @@ class User extends Authenticatable
         return $this->hasMany(Ponto::class);
     }
 
+ public function campanhas()
+{
+     return $this->belongsToMany(Campanha::class, 'campanha_user', 'user_id', 'campanha_id');
+}
 
 }

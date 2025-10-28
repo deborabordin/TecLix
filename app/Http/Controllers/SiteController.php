@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Campanha;
+use Illuminate\Support\Facades\Auth;
+
+
 
 
 use Illuminate\Http\Request;
@@ -34,7 +37,8 @@ class SiteController extends Controller
 
     public function perfil()
     {
-        $usuario = auth()->user();
+        $usuario = Auth::user();
+
 
         $pontos = \App\Models\Ponto::where('user_id', $usuario->id)->sum('quantidade');
 
@@ -42,6 +46,18 @@ class SiteController extends Controller
         $porcentagem = $meta > 0 ? min(100, intval(($pontos / $meta) * 100)) : 0;
 
         return view('perfil', compact('usuario', 'pontos', 'meta', 'porcentagem'));
+
+
+    $usuario = Auth::user();
+
+    $pontos = \App\Models\Ponto::where('user_id', $usuario->id)->sum('quantidade');
+    $meta = 200;
+    $porcentagem = $meta > 0 ? min(100, intval(($pontos / $meta) * 100)) : 0;
+
+    $campanhasParticipadas = $usuario->campanhas;
+
+    return view('perfil', compact('usuario', 'pontos', 'meta', 'porcentagem', 'campanhasParticipadas'));
+
     }
 
 

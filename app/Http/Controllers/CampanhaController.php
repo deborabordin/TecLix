@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Campanha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+
+use App\Models\User;
+
 
 class CampanhaController extends Controller
 {
@@ -98,4 +102,28 @@ class CampanhaController extends Controller
         return redirect()->route('campanhas.index')
                ->with('success', 'Campanha deletada com sucesso.');
     }
+
+public function mostrarParticipantes($id)
+{
+    $campanha = Campanha::findOrFail($id);
+    $participantes = $campanha->participantes; // Isso funciona pois o relacionamento está no model
+
+    return view('campanha.participantes', compact('campanha', 'participantes'));
+}
+
+public function participar(Request $request, Campanha $campanha)
+{
+$user = Auth::user();
+
+
+    // Verifica se já está participando
+    if ($campanha->participantes()->where('user_id', $user->id)->exists()) {
+        return response()->json(['message' => 'Você já está participando desta campanha.'], 400);
+    }
+
+    $campanha->participantes()->attach($user->id);
+
+    return response()->json(['message' => "Você está participando da campanha: {$campanha->titulo}"]);
+}
+
 }

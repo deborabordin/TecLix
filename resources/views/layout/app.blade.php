@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>@yield('title', 'TecLix')</title>
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
@@ -97,9 +97,27 @@
             padding: 20px;
         }
 
+        .dropdown-menu {
+    background-color: #fff;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.dropdown-menu .dropdown-item {
+    color: #228B22;
+    font-weight: 500;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #228B22;
+    color: #fff;
+}
+
     </style>
 
     @stack('css')
+
+
 </head>
 
 <body>
@@ -114,6 +132,24 @@
                 <li><a href="{{ route('site.home') }}">Campanhas</a></li>
                 <li><a href="{{ route('site.coletas') }}">Ponto de Coletas</a></li>
                 <li><a href="{{ route('certificado.gerar') }}">Certificado</a></li>
+
+    <!-- Dropdown Comprovantes -->
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-white fw-semibold"
+        href="#"
+        id="comprovanteDropdown"
+        role="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false">
+        Comprovantes
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="comprovanteDropdown">
+            <li><a class="dropdown-item" href="{{ route('comprovantes.index') }}">Meus comprovantes</a></li>
+            <li><a class="dropdown-item" href="{{ route('comprovantes.create') }}">Enviar novo comprovante</a></li>
+        </ul>
+    </li>
+
+
                 @can('admin', App\Models\User::class)
                     <li><a href="{{ route('admin.home') }}">Admin</a></li>
                 @endcan
@@ -134,6 +170,8 @@
     <main>
         @yield('conteudo')
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+@stack('scripts')
 
 </body>
 </html>

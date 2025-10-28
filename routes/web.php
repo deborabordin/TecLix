@@ -88,3 +88,7 @@ Route::post('/logout', function () {
     Auth::logout();
     return redirect()->route('site.home');
 })->name('logout');
+
+Route::middleware('auth')->post('/campanhas/{campanha}/participar', [CampanhaController::class, 'participar'])->name('campanha.participar');
+
+

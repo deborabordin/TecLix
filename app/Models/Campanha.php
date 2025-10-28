@@ -17,4 +17,10 @@ class Campanha extends Model
         'imagem',
         'ativa',
     ];
+
+        public function participantes()
+    {
+        // 'users' é o nome da tabela de usuários, 'campanha_user' a tabela pivot
+        return $this->belongsToMany(User::class, 'campanha_user', 'campanha_id', 'user_id');
+    }
 }
