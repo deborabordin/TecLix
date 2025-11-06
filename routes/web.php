@@ -92,3 +92,8 @@ Route::post('/logout', function () {
 Route::middleware('auth')->post('/campanhas/{campanha}/participar', [CampanhaController::class, 'participar'])->name('campanha.participar');
 
 
+
+Route::get('/coletas', [PontoDeColetaController::class, 'telaColeta'])->name('site.coletas');
+
+
+

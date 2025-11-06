@@ -7,24 +7,15 @@
         <h2>Selecione o Produto e Porte</h2>
 
         <label for="produto">Produto:</label>
-        <select id="produto">
-            <option value="">Escolha um produto</option>
-            <option>Smartphone</option>
-            <option>Notebook</option>
-            <option>Televisão</option>
-            <option>Tablet</option>
-            <option>Impressora</option>
-            <option>Console</option>
-            <option>Monitor</option>
-            <option>Roteador</option>
-            <option>Câmera Digital</option>
-            <option>Fone de Ouvido</option>
-            <option>Carregador</option>
-            <option>Teclado</option>
-            <option>Mouse</option>
-            <option>Microfone</option>
-            <option>DVD Player</option>
-        </select>
+<select id="produto">
+    <option value="">Escolha um produto</option>
+    @foreach ($produtos as $produto)
+        <option value="{{ $produto->id }}" data-pontuacao="{{ $produto->pontuacao }}">
+            {{ $produto->nome }}
+        </option>
+    @endforeach
+</select>
+
 
         <label for="porte">Porte:</label>
         <select id="porte">
@@ -53,53 +44,35 @@
 </main>
 
 <script>
-    const produtosPontuacao = {
-        "Smartphone": "65 / 100",
-        "Notebook": "80 / 100",
-        "Televisão": "100 / 100",
-        "Tablet": "65 / 100",
-        "Impressora": "90 / 100",
-        "Console": "70 / 100",
-        "Monitor": "70 / 100",
-        "Roteador": "30 / 100",
-        "Câmera Digital": "40 / 100",
-        "Fone de Ouvido": "10 / 100",
-        "Carregador": "10 / 100",
-        "Teclado": "25 / 100",
-        "Mouse": "15 / 100",
-        "Microfone": "25 / 100",
-        "DVD Player": "45 / 100"
-    };
-
-    const enderecoFixo = "Rua José Dalla Pria, 77 - Continental, Guararapes";
-    const horarioFixo = "Segunda a Sexta: 09h00 às 18h00";
-
     const mostrarBtn = document.getElementById('mostrarDescricao');
     const descricaoDiv = document.getElementById('descricao');
     const produtoSelect = document.getElementById('produto');
     const porteSelect = document.getElementById('porte');
 
     mostrarBtn.addEventListener('click', () => {
-        const produto = produtoSelect.value;
+        const produtoNome = produtoSelect.options[produtoSelect.selectedIndex].text;
+        const produtoPontuacao = produtoSelect.options[produtoSelect.selectedIndex].getAttribute('data-pontuacao');
         const porte = porteSelect.value;
 
-        if (!produto || !porte) {
+        if (!produtoSelect.value || !porte) {
             alert('Por favor, selecione o produto e o porte.');
             return;
         }
 
-        const pontuacao = produtosPontuacao[produto] || "N/A";
+        const enderecoFixo = "Rua José Dalla Pria, 77 - Continental, Guararapes";
+        const horarioFixo = "Segunda a Sexta: 09h00 às 18h00";
 
         descricaoDiv.innerHTML = `
-        <strong>Produto:</strong> ${produto}<br>
-        <strong>Porte:</strong> ${porte}<br>
-        <strong>Pontuação:</strong> ${pontuacao}<br><br>
-        <strong>Endereço:</strong> ${enderecoFixo}<br>
-        <strong>Horário de Funcionamento:</strong> ${horarioFixo}
+            <strong>Produto:</strong> ${produtoNome}<br>
+            <strong>Porte:</strong> ${porte}<br>
+            <strong>Pontuação:</strong> ${produtoPontuacao} / 100<br><br>
+            <strong>Endereço:</strong> ${enderecoFixo}<br>
+            <strong>Horário de Funcionamento:</strong> ${horarioFixo}
         `;
         descricaoDiv.style.display = 'block';
     });
 </script>
+
 @endsection
 
 @push('css')

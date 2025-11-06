@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Comprovante;
 use App\Models\Ponto;
+use App\Models\Campanha;
 
 
 class User extends Authenticatable
@@ -62,9 +63,10 @@ class User extends Authenticatable
         return $this->hasMany(Ponto::class);
     }
 
- public function campanhas()
+public function campanhas()
 {
-     return $this->belongsToMany(Campanha::class, 'campanha_user', 'user_id', 'campanha_id');
+     return $this->belongsToMany(\App\Models\Campanha::class, 'campanha_user', 'user_id', 'campanha_id');
+
 }
 
 }

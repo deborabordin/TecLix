@@ -5,7 +5,7 @@
     <h1 style="text-align: center; margin-bottom: 30px;">Painel Administrativo</h1>
 
     <div style="display: flex; flex-direction: column; gap: 15px;">
-        <a href="{{ url('/comprovantes') }}" style="padding: 15px; background-color: #3490dc; color: white; text-align: center; text-decoration: none; border-radius: 5px;">
+        <a href="{{ url('admin/comprovantes') }}" style="padding: 15px; background-color: #3490dc; color: white; text-align: center; text-decoration: none; border-radius: 5px;">
             Gerenciar Comprovantes
         </a>
 

@@ -94,4 +94,11 @@ class PontoDeColetaController extends Controller
 
         return redirect()->route('ponto-de-coletas.index')->with('success', 'Ponto de Coleta deletado com sucesso!');
     }
+
+    public function telaColeta()
+{
+    $produtos = Produto::all(); // busca todos os produtos do banco
+    return view('coletas', compact('produtos'));
+}
+
 }

@@ -26,6 +26,33 @@
         </div>
     </div>
 
+    {{-- Campanhas --}}
+<div class="campanhas-box">
+    <h3>Campanha Atual</h3>
+
+    @if($campanhaAtual)
+        <div class="campanha-atual">
+            <strong>{{ $campanhaAtual->titulo }}</strong><br>
+            <small>{{ $campanhaAtual->descricao }}</small>
+        </div>
+    @else
+        <p>Nenhuma campanha ativa no momento.</p>
+    @endif
+
+    @if($campanhasAnteriores->count() > 0)
+        <h4>Campanhas Anteriores</h4>
+        <ul>
+            @foreach($campanhasAnteriores as $campanha)
+                <li>
+                    <strong>{{ $campanha->titulo }}</strong> <br>
+                    <small>{{ $campanha->descricao }}</small>
+                </li>
+            @endforeach
+        </ul>
+    @endif
+</div>
+
+
     {{-- LADO DIREITO --}}
     <div class="perfil-direito">
 
@@ -197,5 +224,39 @@
         font-size: 14px;
         color: #555;
     }
+
+    .campanhas-box {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.campanha-atual {
+    background: #eaffea;
+    border: 1px solid #16a34a;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.campanhas-box h3 {
+    margin-bottom: 10px;
+    color: #14532d;
+}
+
+.campanhas-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+
+.campanhas-box li {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 6px;
+}
+
 </style>
 @endpush
