@@ -7,7 +7,7 @@
         <img src="img/logoo.png" alt="Teclix Logo" class="logo">
         <h2>Bem-vindo de volta!</h2>
 
-        <form method="POST" action="{{ route('autenticacao.login') }}">
+        <form method="post" action="{{ route('autenticacao.login') }}">
             @csrf
 
             <input type="email" placeholder="Email" name="email" required>
