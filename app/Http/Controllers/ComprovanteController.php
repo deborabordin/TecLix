@@ -13,7 +13,9 @@ class ComprovanteController extends Controller
     // Mostrar todos os comprovantes do usuário autenticado
     public function index()
     {
-        $comprovantes = Comprovante::where('user_id', 1)->latest()->get();
+        $user = auth()->user();
+
+        $comprovantes = Comprovante::where('user_id', $user->id)->latest()->get();
 
         return view('comprovantes.index', compact('comprovantes'));
     }

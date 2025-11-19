@@ -20,7 +20,7 @@ class CertificadoController extends Controller
     public function gerar()
     {
     /** @var \App\Models\User $user */
-$user = Auth::user();
+        $user = Auth::user();
 
 
         // Pega todos os comprovantes aprovados com pontos (ajuste se necessário)
