@@ -28,16 +28,7 @@
 
     {{-- Campanhas --}}
 <div class="campanhas-box">
-    <h3>Campanha Atual</h3>
 
-    @if($campanhaAtual)
-        <div class="campanha-atual">
-            <strong>{{ $campanhaAtual->titulo }}</strong><br>
-            <small>{{ $campanhaAtual->descricao }}</small>
-        </div>
-    @else
-        <p>Nenhuma campanha ativa no momento.</p>
-    @endif
 
     @if($campanhasAnteriores->count() > 0)
         <h4>Campanhas Anteriores</h4>

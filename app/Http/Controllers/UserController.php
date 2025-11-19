@@ -49,32 +49,7 @@ class UserController extends Controller
 
     }
 
-    public function perfil()
-    {
 
-        $usuario = Auth::user();
-
-        // campanha ativa (se houver)
-        $campanhaAtual = Campanha::where('ativa', true)->first();
-
-        // campanhas anteriores vinculadas ao usuário (rel. belongsToMany no User)
-        $campanhasAnteriores = $usuario->campanhas()->where('ativa', false)->get();
-
-        // seus valores de pontos/meta/progresso (ajuste conforme sua lógica real)
-        $pontos = $usuario->pontos ?? 0;
-        $meta = 200;
-        $porcentagem = $meta > 0 ? min(100, ($pontos / $meta) * 100) : 0;
-
-        return view('perfil', compact(
-            'usuario',
-            'pontos',
-            'meta',
-            'porcentagem',
-            'campanhaAtual',
-            'campanhasAnteriores'
-        ));
-
-    }
 }
 
 

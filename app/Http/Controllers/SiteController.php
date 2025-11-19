@@ -40,17 +40,19 @@ class SiteController extends Controller
         $meta = 200;
         $porcentagem = $meta > 0 ? min(100, intval(($pontos / $meta) * 100)) : 0;
 
-        $campanhaAtual = Campanha::where('ativa', true)->first();
+
         // campanhas anteriores vinculadas ao usuário (rel. belongsToMany no User)
         $campanhasAnteriores = $usuario->campanhas()->where('ativa', false)->get();
 
-        $campanhasParticipadas = $usuario->campanhas;  return view('perfil', compact(
+        $campanhasParticipadas = $usuario->campanhas;
+
+        return view('perfil', compact(
             'usuario',
             'pontos',
             'meta',
             'porcentagem',
             'campanhasParticipadas',
-            'campanhaAtual',
+
             'campanhasAnteriores')
         );
     }
