@@ -6,9 +6,6 @@ use App\Models\User;
 use App\Models\Campanha;
 use Illuminate\Support\Facades\Auth;
 
-
-
-
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
@@ -40,7 +37,6 @@ class SiteController extends Controller
         $usuario = Auth::user();
 
         $pontos = \App\Models\Ponto::where('user_id', $usuario->id)->sum('quantidade');
-
         $meta = 200;
         $porcentagem = $meta > 0 ? min(100, intval(($pontos / $meta) * 100)) : 0;
 
