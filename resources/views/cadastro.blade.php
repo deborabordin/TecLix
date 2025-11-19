@@ -9,8 +9,17 @@
                 @csrf
 
                 <input type="text" placeholder="Nome completo" name="name" required>
+                @error('name')
+                    {{ $message }}
+                @enderror
                 <input type="email" placeholder="Email" name="email" required>
+                @error('email')
+                    {{ $message }}
+                @enderror
                 <input type="password" placeholder="Confirmar a senha" name="password" required>
+                @error('password')
+                    {{ $message }}
+                @enderror
                 <button type="submit">Cadastrar</button>
 
                 <div class="links">

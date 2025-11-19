@@ -20,8 +20,10 @@ class UserController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|min:3',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'password' => ['required', Password::min(6)]
+        ], [
+            'unique' => 'O email já está em uso'
         ]);
 
         $user = new User($validated);
